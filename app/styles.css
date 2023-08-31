@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    max-width: 560px;
+    background: lightgray;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.card > p {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.picture {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.youtube {
+    border: none;
+
+    height: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.date {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
+.tags {
+    margin-top: 8px;
+    padding-left: 16px;
+}
+
+.tag {
+    font-weight: bold;
+}
