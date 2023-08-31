@@ -12,10 +12,35 @@ function append(tag, className, parent) {
     return element;
 }
 
+/**
+ * @param search {string}
+ * @returns {{}}
+ */
+function parseQuery(search) {
+    let query = {};
+    let pairs = (search[0] === '?' ? search.substring(1) : search).split('&');
+    for (let i = 0; i < pairs.length; i++) {
+        let [a, b] = pairs[i].split('=');
+        let key = decodeURIComponent(a);
+        let value = decodeURIComponent(b || '');
+        query[key] = value;
+    }
+    return query;
+}
+
 setTimeout(() => {
-    console.log('Hello world!');
+    const query = parseQuery(window.location.search);
+    const tagsFilter = query.tags ? query.tags.split('+') : [];
+    console.log('Hello world!', tagsFilter);
+
     let container = append('div', 'container', document.body);
     for (let article of articles) {
+        if (tagsFilter.length > 0) {
+            let index = article.tags.findIndex(tag => tagsFilter.includes(tag));
+            if (index == -1) {
+                continue
+            }
+        }
         let card = append('div', 'card', container);
 
         // let title = append('h1', '', card);
@@ -23,25 +48,38 @@ setTimeout(() => {
 
         let preview = article.preview;
         if (preview.type === 'picture') {
-            let img = append('img', 'picture', card);
+            let responsive = append('div', 'aspect-16-9', card);
+            let img = append('img', 'picture', responsive);
             img.src = preview.url;
             let date = append('h2', 'date', card);
-            date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {year: 'numeric', month: 'long', day: 'numeric'});
+            date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        if (preview.type === 'vimeo') {
+            let div = append('div', 'aspect-16-9', card);
+            let iframe = append('iframe', 'vimeo', div);
+            iframe.src = preview.url;
+            iframe.allow = "autoplay; fullscreen; picture-in-picture";
+            iframe.title = article.title;
+            let date = append('h2', 'date', card);
+            date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
         }
 
         if (preview.type === 'youtube') {
-            let iframe = append('iframe', 'youtube', card);
-            // iframe.width = "560";
-            // iframe.height = "315";
-            // https://www.youtube.com/watch?v=qJ16vPIZpqc&t=1202s
-            iframe.src = "https://www.youtube.com/embed/qJ16vPIZpqc?si=AgNLJohMoRE9Z976&start=1202&wmode=transparent";
-            iframe.title="YouTube video player";
-            iframe.frameborder="0";
-            iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-
-            /**
-             * <iframe width="560" height="315" src="https://www.youtube.com/embed/qJ16vPIZpqc?si=AgNLJohMoRE9Z976" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-             */
+            let div = append('div', 'aspect-16-9', card);
+            let iframe = append('iframe', 'youtube', div);
+            iframe.src = preview.url;
+            iframe.title = "YouTube video player";
+            iframe.frameborder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         }
 
         let tags = append('div', 'tags', card);
@@ -53,4 +91,4 @@ setTimeout(() => {
         let paragraph = append('p', '', card);
         paragraph.innerText = article.text;
     }
-}, 100);
+});

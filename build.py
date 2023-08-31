@@ -99,9 +99,10 @@ def parse_articles(src: str) -> List[Article]:
 
 
 def render_articles(articles: List[Article], dst: str):
-    with open(dst, 'w') as output:
+    with open(dst, 'w', encoding='utf8') as output:
         json_articles = [asdict(article) for article in articles]
-        data = json.dumps(json_articles, indent=4)
+        data = json.dumps(json_articles, indent=4, ensure_ascii=False)
+        print(articles)
         output.write('const articles = ' + data)
 
 
