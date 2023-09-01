@@ -1,17 +1,41 @@
 const articles = [
     {
         "title": "Topic 1",
-        "date": "2023-07-21",
+        "date": "2023-09-01",
         "tags": [
-            "a",
-            "b",
-            "c"
+            "разработка",
+            "игры"
         ],
         "preview": {
-            "url": "/static/2023/birds.png",
+            "url": "/static/2023/starines-html.png",
             "type": "picture"
         },
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnaaliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sintoccaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "text": " Начал подготовку к созданию новой игры под рабочим названием «Старины». Будет по-настоящему эпичная пошаговая тактика в атмосфере славянского фентези: сотни юнитов на поле боя, изменение рельефа и разрушения замков под ударами мощной магии, большие монстры помещаются на экран только со стратегического вида."
+    },
+    {
+        "title": "Запуск разработки игры «Старины»",
+        "date": "2023-07-23",
+        "tags": [
+            "разработка",
+            "игры"
+        ],
+        "preview": {
+            "url": "/static/2023/starines-html.png",
+            "type": "picture"
+        },
+        "text": " Начал подготовку к созданию новой игры под рабочим названием «Старины». Будет по-настоящему эпичная пошаговая тактика в атмосфере славянского фентези: сотни юнитов на поле боя, изменение рельефа и разрушения замков под ударами мощной магии, большие монстры помещаются на экран только со стратегического вида."
+    },
+    {
+        "title": "Запуск разработки игры «Старины»",
+        "date": "2023-07-23",
+        "tags": [
+            "путешествия"
+        ],
+        "preview": {
+            "url": "/static/2023/altai.jpg",
+            "type": "picture"
+        },
+        "text": " Несколько лет думал посетить горный Алтай. Природа Алтая уникальна во всех своих проявлениях, и настолько богата невероятными пейзажами, что наслаждаться их красотой можно вечно."
     },
     {
         "title": "Topc 2",
@@ -24,7 +48,7 @@ const articles = [
             "url": "https://www.youtube.com/embed/qJ16vPIZpqc?si=AgNLJohMoRE9Z976&start=1202",
             "type": "youtube"
         },
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnaaliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sintoccaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         "title": "Topic 3",
@@ -40,7 +64,7 @@ const articles = [
             "url": "https://www.youtube.com/embed/qJ16vPIZpqc?si=AgNLJohMoRE9Z976&start=1202",
             "type": "youtube"
         },
-        "text": "Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречитинженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферыробототехники.Модель кинематической цепи идеально описывает профиль подключения сантехнического прибора к трассеводоотведения, гарантирует точное позиционирование и соосность фитингов и труб. Не менее важным является способпредставления системы так, чтобы инженеры разной квалификации могли легко и однозначно интерпретировать результатырасчётов.Поэтому мы реализовали приложение, в центре которого 3D проекция трассы водоотведения с интерактивнымиэлементами управления. Изменение параметров расчёта приводит к обновлению этой проекции в режиме реального времени. Витоге наше приложение уменьшает трудоёмкость проектирования сетей водоотведения."
+        "text": " Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречит инженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферы робототехники. Модель кинематической цепи идеально описывает профиль подключения сантехнического прибора к трассе водоотведения, гарантирует точное позиционирование и соосность фитингов и труб. Не менее важным является способ представления системы так, чтобы инженеры разной квалификации могли легко и однозначно интерпретировать результаты расчётов. Поэтому мы реализовали приложение, в центре которого 3D проекция трассы водоотведения с интерактивными элементами управления. Изменение параметров расчёта приводит к обновлению этой проекции в режиме реального времени. В итоге наше приложение уменьшает трудоёмкость проектирования сетей водоотведения."
     },
     {
         "title": "Topic 4",
@@ -54,7 +78,7 @@ const articles = [
             "url": "/static/2023/birds.png",
             "type": "picture"
         },
-        "text": "Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречитинженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферыробототехники."
+        "text": " Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречит инженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферы робототехники."
     },
     {
         "title": "Project A",
@@ -67,6 +91,6 @@ const articles = [
             "url": "https://player.vimeo.com/video/58010529?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
             "type": "vimeo"
         },
-        "text": "Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречитинженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферыробототехники."
+        "text": " Для систем проектирования инженерных сетей важно в первую очередь получить корректный результат, который не противоречит инженерным и санитарным нормам. Поэтому мы использовали детерминированный алгоритм инверсной кинематики из сферы робототехники."
     }
 ]

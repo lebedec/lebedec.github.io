@@ -80,7 +80,7 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
             if not line:
                 print('break')
             else:
-                article.text += line
+                article.text += ' ' + line
     return articles
 
 
