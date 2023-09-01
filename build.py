@@ -78,7 +78,7 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
                 continue
 
             if not line:
-                print('break')
+                pass
             else:
                 article.text += ' ' + line
     return articles
@@ -88,7 +88,7 @@ def parse_articles(src: str) -> List[Article]:
     root = os.path.dirname(__file__)
     src = os.path.join(root, src)
     articles = []
-    for name in os.listdir(src):
+    for name in sorted(os.listdir(src), reverse=True):
         if not name.endswith('.md'):
             continue
         year, _ = name.split('.')

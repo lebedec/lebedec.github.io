@@ -28,7 +28,14 @@ function parseQuery(search) {
     return query;
 }
 
-setTimeout(() => {
+/**
+ * @returns {string}
+ */
+function getBaseURL() {
+    return window.location.protocol + "//" + window.location.host + window.location.pathname
+}
+
+window.onload = () => {
     const query = parseQuery(window.location.search);
     const tagsFilter = query.tags ? query.tags.split('+') : [];
     console.log('Hello world!', tagsFilter);
@@ -37,7 +44,7 @@ setTimeout(() => {
     for (let article of articles) {
         if (tagsFilter.length > 0) {
             let index = article.tags.findIndex(tag => tagsFilter.includes(tag));
-            if (index == -1) {
+            if (index === -1) {
                 continue
             }
         }
@@ -51,12 +58,6 @@ setTimeout(() => {
             let responsive = append('div', 'aspect-16-9', card);
             let img = append('img', 'picture', responsive);
             img.src = preview.url;
-            let date = append('h2', 'date', card);
-            date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
         }
 
         if (preview.type === 'vimeo') {
@@ -65,12 +66,6 @@ setTimeout(() => {
             iframe.src = preview.url;
             iframe.allow = "autoplay; fullscreen; picture-in-picture";
             iframe.title = article.title;
-            let date = append('h2', 'date', card);
-            date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
         }
 
         if (preview.type === 'youtube') {
@@ -82,13 +77,30 @@ setTimeout(() => {
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         }
 
-        let tags = append('div', 'tags', card);
+        let header = append('div', 'header', card);
+
+        let date = append('h4', 'date', header);
+        date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        let tags = append('div', 'tags', header);
         for (let tag of article.tags) {
-            let span = append('span', 'tag', tags);
-            span.innerText = tag + ", ";
+            let className = 'tag';
+            let href = getBaseURL() + '?tags=' + tag;
+            if (tagsFilter.includes(tag)) {
+                className += ' active';
+                tag += '*';
+                href = getBaseURL();
+            }
+            let span = append('a', className, tags);
+            span.innerText = tag;
+            span.href = href;
         }
 
-        let paragraph = append('p', '', card);
+        let paragraph = append('p', 'paragraph', card);
         paragraph.innerText = article.text;
     }
-});
+}
