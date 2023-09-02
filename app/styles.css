@@ -8,26 +8,34 @@ body {
     min-width: 320px;
     width: 100%;
     height: 100%;
+    margin: 0;
 }
 
 .container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: auto;
-    max-width: calc(560px + 560px + 10px + 10px);
-    column-gap: 16px;
 }
 
 .card {
     position: relative;
     max-width: 560px;
-    min-height: 480px;
+    min-height: 360px;
     background: white;
-    border-radius: 16px;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    margin-bottom: 16px;
+    /*border-radius: 16px 16px 0px 0px;*/
+    margin: 8px 0px;
+}
+
+@media (min-width: 576px) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .container {
+        padding: 8px;
+    }
+    .card {
+        margin: 8px;
+    }
 }
 
 
@@ -43,12 +51,14 @@ body {
     width: 100%;
     height: 100%;
     border: none;
+    object-fit: cover;
+    object-position: center;
 }
 
 .aspect-16-9 {
     padding: 56.25% 0 0 0;
     position: relative;
-    border-radius: 16px;
+
 }
 
 .vimeo {
@@ -58,6 +68,7 @@ body {
     width: 100%;
     height: 100%;
     border: none;
+
 }
 
 .youtube {
