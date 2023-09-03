@@ -60,6 +60,12 @@ window.onload = () => {
             img.src = preview.url;
         }
 
+        if (preview.type === 'gif') {
+            let responsive = append('div', 'aspect-16-9', card);
+            let img = append('img', 'gif', responsive);
+            img.src = preview.url;
+        }
+
         if (preview.type === 'vimeo') {
             let div = append('div', 'aspect-16-9', card);
             let iframe = append('iframe', 'vimeo', div);

@@ -24,6 +24,11 @@ class Picture:
     url: str
     type: str = 'picture'
 
+@dataclass
+class Gif:
+    url: str
+    type: str = 'gif'
+
 
 @dataclass
 class Article:
@@ -44,6 +49,7 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
     youtube_url = re.compile('\[youtube\]\((.+)\)')
     vimeo_url = re.compile('\[vimeo\]\((.+)\)')
     picture_url = re.compile('\!\[picture\]\((.+)\)')
+    gif_url = re.compile('\!\[gif\]\((.+)\)')
     with open(path) as file:
         while line := file.readline():
             line = line.rstrip()
@@ -68,6 +74,11 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
             if line.startswith('![picture]'):
                 url = picture_url.match(line).group(1)
                 article.preview = Picture(pictures_root + url)
+                continue
+
+            if line.startswith('![gif]'):
+                url = gif_url.match(line).group(1)
+                article.preview = Gif(pictures_root + url)
                 continue
 
             if line.startswith('> '):
