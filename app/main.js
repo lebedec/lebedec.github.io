@@ -108,5 +108,11 @@ window.onload = () => {
 
         let paragraph = append('p', 'paragraph', card);
         paragraph.innerText = article.text;
+
+        if (article.link) {
+            let link = append('a', '', card);
+            link.href = article.link;
+            link.innerText = article.link;
+        }
     }
 }

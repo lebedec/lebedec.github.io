@@ -4,6 +4,7 @@ import re
 from dataclasses import asdict
 from dataclasses import dataclass
 from typing import List
+from typing import Optional
 from typing import Union
 
 
@@ -37,15 +38,17 @@ class Article:
     tags: List[str]
     preview: Union[Picture, YouTube, Vimeo]
     text: str
+    link: Optional[str]
 
     @staticmethod
     def empty():
-        return Article('', '1970-01-01', [], Picture(''), '')
+        return Article('', '1970-01-01', [], Picture(''), '', None)
 
 
 def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
     articles = []
     article = Article.empty()
+    link_url = re.compile('\[link\]\((.+)\)')
     youtube_url = re.compile('\[youtube\]\((.+)\)')
     vimeo_url = re.compile('\[vimeo\]\((.+)\)')
     picture_url = re.compile('\!\[picture\]\((.+)\)')
@@ -61,6 +64,11 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
                 article.date = line.replace('## ', '')
                 continue
 
+            if line.startswith('[link]'):
+                url = link_url.match(line).group(1)
+                article.link = url
+                continue
+
             if line.startswith('[youtube]'):
                 url = youtube_url.match(line).group(1)
                 article.preview = YouTube(url)
@@ -73,12 +81,16 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
 
             if line.startswith('![picture]'):
                 url = picture_url.match(line).group(1)
-                article.preview = Picture(pictures_root + url)
+                if not url.startswith('http'):
+                    url = pictures_root + url
+                article.preview = Picture(url)
                 continue
 
             if line.startswith('![gif]'):
                 url = gif_url.match(line).group(1)
-                article.preview = Gif(pictures_root + url)
+                if not url.startswith('http'):
+                    url = pictures_root + url
+                article.preview = Picture(url)
                 continue
 
             if line.startswith('> '):
