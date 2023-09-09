@@ -7,6 +7,22 @@ body {
     margin: 0;
 }
 
+.modes {
+    padding: 8px;
+}
+
+.mode {
+    cursor: pointer;
+    padding: 8px;
+    text-decoration: none;
+}
+
+.mode.active {
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.03), 0 1px 6px -1px rgba(0,0,0,.02), 0 2px 4px 0 rgba(0,0,0,.02);
+    color: rgba(0,0,0,.88);
+}
+
 .container {
     display: flex;
     flex-direction: row;

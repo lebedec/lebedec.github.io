@@ -28,6 +28,21 @@ function parseQuery(search) {
     return query;
 }
 
+function saveQuery(query) {
+    let pairs = [];
+    for (let key of Object.keys(query)) {
+        let value = query[key];
+        if (value) {
+            pairs.push(key + '=' + encodeURIComponent(value));
+        }
+    }
+    if (pairs.length > 0) {
+        return '?' + pairs.join('&');
+    } else {
+        return '';
+    }
+}
+
 /**
  * @returns {string}
  */
@@ -38,10 +53,32 @@ function getBaseURL() {
 window.onload = () => {
     const query = parseQuery(window.location.search);
     const tagsFilter = query.tags ? query.tags.split('+') : [];
-    console.log('Hello world!', tagsFilter);
+    const isBlog = query.blog === 'true';
+    console.log('Hello world!', tagsFilter, isBlog);
+
+
+    const modes = append('div', 'modes', document.body)
+    let mode = append('a', 'mode', modes);
+    mode.innerText = 'Блог';
+    mode.href = getBaseURL() + saveQuery({blog: 'true', tags: query.tags});
+    if (isBlog) {
+        mode.className += ' active';
+    }
+    mode = append('a', 'mode', modes);
+    mode.innerText = 'Портфолио'
+    mode.href = getBaseURL() + saveQuery({tags: query.tags});
+    if (!isBlog) {
+        mode.className += ' active';
+    }
+
+    const filter = (tag) => getBaseURL() + saveQuery({blog: query.blog, tags: tag});
 
     let container = append('div', 'container', document.body);
     for (let article of articles) {
+        let index = article.tags.findIndex(tag => tag === 'блог');
+        if (!isBlog && index !== -1) {
+            continue
+        }
         if (tagsFilter.length > 0) {
             let index = article.tags.findIndex(tag => tagsFilter.includes(tag));
             if (index === -1) {
@@ -95,11 +132,11 @@ window.onload = () => {
         let tags = append('div', 'tags', header);
         for (let tag of article.tags) {
             let className = 'tag';
-            let href = getBaseURL() + '?tags=' + tag;
+            let href = filter(tag);
             if (tagsFilter.includes(tag)) {
                 className += ' active';
                 tag += '*';
-                href = getBaseURL();
+                href = filter();
             }
             let span = append('a', className, tags);
             span.innerText = tag;
