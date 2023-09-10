@@ -39,10 +39,11 @@ class Article:
     preview: Union[Picture, YouTube, Vimeo]
     text: str
     link: Optional[str]
+    coordinates: List[float]
 
     @staticmethod
     def empty():
-        return Article('', '1970-01-01', [], Picture(''), '', None)
+        return Article('', '1970-01-01', [], Picture(''), '', None, [59.938784, 30.314997])
 
 
 def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
@@ -62,6 +63,10 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
 
             if line.startswith('## '):
                 article.date = line.replace('## ', '')
+                continue
+
+            if line.startswith('### '):
+                article.coordinates = [float(value) for value in line.replace('### ', '').split(',')]
                 continue
 
             if line.startswith('[link]'):

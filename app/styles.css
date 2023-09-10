@@ -40,6 +40,22 @@ body {
     margin: 8px 0px;
 }
 
+.link {
+}
+
+.link .icon {
+    max-width: 1.4rem;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 2;
+    color: #6f7577;
+}
+
+.icon:hover {
+    color: #548eaa;
+}
+
 @media (min-width: 592px) {
     .container {
         padding: 8px;
@@ -168,4 +184,11 @@ body {
 
 .paragraph {
     margin-top: 0px;
+}
+
+.map {
+    width: calc(100% - 16px - 16px);
+    min-height: 360px;
+    background-color: red;
+    margin: 8px;
 }
