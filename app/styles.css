@@ -79,6 +79,13 @@ body {
     }
 }
 
+@media (min-width: 1744px) {
+    .container {
+        width: 1744px;
+        margin: 0 auto;
+    }
+}
+
 
 .card > p {
     padding-left: 16px;
@@ -190,7 +197,7 @@ body {
 .map {
     flex-grow: 1;
     width: 100%;
-    min-height: 100vw;
+    min-height: 75vw;
     margin: 8px;
     background-color: red;
 }
