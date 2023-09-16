@@ -94,7 +94,14 @@ window.onload = () => {
             });
             for (let key of Object.keys(uniqueCoordinates)) {
                 let article = uniqueCoordinates[key];
-                DG.circle(article.coordinates, 100 * 1000, {weight: 1}).addTo(map);
+                let coordinates = [article.coordinates[0], article.coordinates[1]];
+                DG.circle(coordinates, 100 * 1000, {weight: 2, color: 'black'}).addTo(map);
+                if (article.coordinates.length > 2) {
+                    for (let i = 2; i < article.coordinates.length; i+= 2) {
+                        let coordinates = [article.coordinates[i], article.coordinates[i+1]];
+                        DG.circle(coordinates, 50 * 1000, {weight: 2, color: 'black'}).addTo(map);
+                    }
+                }
             }
         });
     }
