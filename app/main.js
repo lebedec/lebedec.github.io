@@ -124,7 +124,7 @@ window.onload = () => {
                 if (article.coordinates.length > 2) {
                     for (let i = 2; i < article.coordinates.length; i += 2) {
                         let coordinates = [article.coordinates[i], article.coordinates[i + 1]];
-                        cirlce = DG.circle(coordinates, 50 * 1000, {weight: 2, color: 'black'});
+                        circle = DG.circle(coordinates, 50 * 1000, {weight: 2, color: 'black'});
                         circle.addTo(map);
                         circle.addEventListener('click', () => {
                             let access = document.getElementById(article.date);
