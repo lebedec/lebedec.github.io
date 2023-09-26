@@ -70,7 +70,25 @@ window.onload = () => {
         uniqueCoordinates[article.coordinates.toString()] = article;
     }
 
-    let container = append('div', 'container', document.body);
+    let container = document.getElementById("container");
+
+    function fixMarginLeft() {
+        let w = 736 + 80;
+        let width = document.documentElement.scrollWidth;
+        if (width >= (736 + 736 + 80)) {
+            let maxCards = Math.floor((width + 80) / w);
+            let contentWidth = 736 * maxCards + 80 * (maxCards - 1);
+            let marginLeft = (width - contentWidth) / 2.0;
+            container.style.marginLeft = marginLeft + 'px';
+            console.log('W', width, marginLeft);
+        } else {
+            container.style.marginLeft = '0px';
+            console.log('W', width, 'none');
+        }
+    }
+
+    fixMarginLeft();
+    window.addEventListener('resize', () => fixMarginLeft())
 
     if (tagsFilter.includes('путешествия')) {
         let gisContainer = append('div', 'map', container);
@@ -90,16 +108,28 @@ window.onload = () => {
             // https://api.2gis.ru/doc/maps/ru/manual/vector-layers/#dgpath-options
             map = DG.map('gis', {
                 'center': [avgLat, avgLon],
-                'zoom': 4
+                'zoom': 4,
+                zoomControl: false,
+                fullscreenControl: false
             });
             for (let key of Object.keys(uniqueCoordinates)) {
                 let article = uniqueCoordinates[key];
                 let coordinates = [article.coordinates[0], article.coordinates[1]];
-                DG.circle(coordinates, 100 * 1000, {weight: 2, color: 'black'}).addTo(map);
+                let circle = DG.circle(coordinates, 100 * 1000, {weight: 2, color: 'black'});
+                circle.addTo(map);
+                circle.addEventListener('click', () => {
+                    let access = document.getElementById(article.date);
+                    access.scrollIntoView({behavior: 'smooth'}, true);
+                })
                 if (article.coordinates.length > 2) {
-                    for (let i = 2; i < article.coordinates.length; i+= 2) {
-                        let coordinates = [article.coordinates[i], article.coordinates[i+1]];
-                        DG.circle(coordinates, 50 * 1000, {weight: 2, color: 'black'}).addTo(map);
+                    for (let i = 2; i < article.coordinates.length; i += 2) {
+                        let coordinates = [article.coordinates[i], article.coordinates[i + 1]];
+                        cirlce = DG.circle(coordinates, 50 * 1000, {weight: 2, color: 'black'});
+                        circle.addTo(map);
+                        circle.addEventListener('click', () => {
+                            let access = document.getElementById(article.date);
+                            access.scrollIntoView({behavior: 'smooth'}, true);
+                        });
                     }
                 }
             }
@@ -109,15 +139,25 @@ window.onload = () => {
     for (let article of visible) {
         let card = append('div', 'card', container);
 
-        if (article.link) {
-            card.className += ' link';
-            let icon = append('a', 'icon', card);
-            icon.innerHTML = ICON;
-            icon.href = article.link;
-        }
+        // if (article.link) {
+        //     card.className += ' link';
+        //     let icon = append('a', 'icon', card);
+        //     icon.innerHTML = ICON;
+        //     icon.href = article.link;
+        // }
 
         // let title = append('h1', '', card);
         // title.innerText = article.title;
+
+
+        let header = append('div', 'header', card);
+        let date = append('h4', 'date', header);
+        date.id = article.date;
+        date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
 
         let preview = article.preview;
         if (preview.type === 'picture') {
@@ -149,31 +189,22 @@ window.onload = () => {
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         }
 
-        let header = append('div', 'header', card);
+        let paragraph = append('p', 'paragraph', card);
+        paragraph.innerText = article.text;
 
-        let date = append('h4', 'date', header);
-        date.innerText = new Date(article.date).toLocaleDateString('ru-Ru', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        let tags = append('div', 'tags', header);
+        let footer = append('div', 'footer', card);
+        let tags = append('div', 'tags', footer);
         for (let tag of article.tags) {
             let className = 'tag';
             let href = filter(tag);
             if (tagsFilter.includes(tag)) {
                 className += ' active';
-                tag += '*';
                 href = filter();
             }
             let span = append('a', className, tags);
             span.innerText = tag;
             span.href = href;
         }
-
-        let paragraph = append('p', 'paragraph', card);
-        paragraph.innerText = article.text;
     }
 }
 

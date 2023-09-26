@@ -1,10 +1,57 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #141414;
     min-height: 100vh;
     min-width: 320px;
     width: 100%;
     margin: 0;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: red;
+    padding: 1rem;
+    align-items: center;
+    background-color: #141414;
+}
+
+.bio {
+    text-align: center;
+}
+
+.profile > img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.bio > span {
+    margin: 0;
+    color: #F9F6F0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.bio > h2 {
+    margin: 0;
+    color: #F9F6F0;
+    font-size: 24px;
+    font-weight: 600;
+    word-wrap: break-word
+}
+
+.bio > a, .bio > a:visited, .bio > a:active, .bio > a:hover {
+    color: #9BF75D;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    word-wrap: break-word
 }
 
 .modes {
@@ -31,65 +78,22 @@ body {
 
 .card {
     position: relative;
-    max-width: 560px;
+    max-width: 100%;
     min-height: 360px;
-    background: white;
-    overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    /*border-radius: 16px 16px 0px 0px;*/
-    margin: 8px 0px;
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 4rem;
 }
 
-.link {
-}
-
-.link .icon {
-    max-width: 1.4rem;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    z-index: 2;
-    color: #6f7577;
-}
-
-.icon:hover {
-    color: #548eaa;
-}
-
-@media (min-width: 592px) {
-    .container {
-        padding: 8px;
-    }
-
-    .container {
-        width: 592px;
-        margin: 0 auto;
-    }
-
-    .card {
-        margin: 8px;
-    }
-}
-
-
-@media (min-width: 1168px) {
-    .container {
-        width: 1168px;
-        margin: 0 auto;
-    }
-}
-
-@media (min-width: 1744px) {
-    .container {
-        width: 1744px;
-        margin: 0 auto;
-    }
-}
-
-
-.card > p {
-    padding-left: 16px;
-    padding-right: 16px;
+.paragraph {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: rgba(249, 246, 240, 0.60);
+    font-size: 16px;
+    font-weight: 600;
+    word-wrap: break-word
 }
 
 .picture {
@@ -101,6 +105,8 @@ body {
     border: none;
     object-fit: cover;
     object-position: center;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .gif {
@@ -112,12 +118,13 @@ body {
     border: none;
     object-fit: cover;
     object-position: center;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .aspect-16-9 {
     padding: 56.25% 0 0 0;
     position: relative;
-
 }
 
 .vimeo {
@@ -127,7 +134,8 @@ body {
     width: 100%;
     height: 100%;
     border: none;
-
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .youtube {
@@ -137,25 +145,28 @@ body {
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .header {
     display: flex;
-    align-items: center;
-    padding-left: 16px;
-    padding-right: 20px;
+    margin-bottom: 16px;
 }
 
 .date {
-
-    margin-top: 16px;
-    margin-bottom: 16px;
-    color: #333;
+    color: #F9F6F0;
+    font-size: 24px;
+    font-weight: 800;
     flex-grow: 1;
+    margin: 0;
+}
+
+.footer {
+    display: flex;
 }
 
 .tags {
-    color: #6f7577;
     font-size: .8125rem;
 }
 
@@ -165,11 +176,16 @@ body {
     cursor: pointer;
     user-select: none;
     text-decoration: none;
+
+    color: #F9F6F0;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 32px;
 }
 
 
-.tag:after {
-    content: ', ';
+.tag:before {
+    content: '→ ';
 }
 
 .tag:last-of-type:after {
@@ -178,34 +194,68 @@ body {
 
 
 .tag:visited, .tag:link {
-    color: #6f7577;
+    color: #F9F6F0;
 }
 
 .tag:hover {
-    color: #548eaa;
+    color: #9BF75D;
 }
 
 
 .tag.active {
-    color: #7aa600;
-}
-
-.paragraph {
-    margin-top: 0px;
+    color: #9BF75D;
 }
 
 .map {
-    flex-grow: 1;
     width: 100%;
-    min-height: 75vw;
-    margin: 8px;
-    background-color: red;
+    padding: 56.25% 0 0 0;
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 4rem;
 }
 
+.gis {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
 
-@media (min-width: 592px) {
+@media (min-width: calc(850px)) {
     .map {
-        min-height: 360px;
-        width: calc(100% - 16px - 16px);
+        padding: 0;
+        margin-top: 44px;
+        height: 520px;
+    }
+}
+
+@media (min-width: calc(736px + 736px + 80px)) {
+    .map {
+        width: calc(736px + 736px + 80px);
+    }
+}
+
+@media (min-width: calc(736px + 736px + 80px)) {
+    .map {
+        margin: 0;
+        margin-top: 44px;
+    }
+
+    .card {
+        max-width: 736px;
+        margin: 0;
+    }
+
+    .container {
+        gap: 80px;
+        justify-content: flex-start;
+    }
+
+    .card:last-of-type {
+        margin-bottom: 80px;
     }
 }
