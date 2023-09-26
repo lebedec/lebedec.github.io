@@ -5,7 +5,8 @@ const articles = [
         "tags": [
             "блог",
             "игры",
-            "старины"
+            "старины",
+            "test"
         ],
         "preview": {
             "url": "/static/2023/starines-preprod.png",
