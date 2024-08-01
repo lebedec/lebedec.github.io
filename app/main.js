@@ -189,6 +189,16 @@ window.onload = () => {
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         }
 
+        if (preview.type === 'rutube') {
+            let div = append('div', 'aspect-16-9', card);
+            let iframe = append('iframe', 'rutube', div);
+            iframe.src = preview.url;
+            iframe.title = "RuTube video player";
+            iframe.frameborder = "0";
+            iframe.allowFullScreen = "";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        }
+
         let paragraph = append('p', 'paragraph', card);
         paragraph.innerText = article.text;
 

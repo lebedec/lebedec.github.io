@@ -15,6 +15,12 @@ class YouTube:
 
 
 @dataclass
+class RuTube:
+    url: str
+    type: str = 'rutube'
+
+
+@dataclass
 class Vimeo:
     url: str
     type: str = 'vimeo'
@@ -51,6 +57,7 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
     article = Article.empty()
     link_url = re.compile('\[link\]\((.+)\)')
     youtube_url = re.compile('\[youtube\]\((.+)\)')
+    rutube_url = re.compile('\[rutube\]\((.+)\)')
     vimeo_url = re.compile('\[vimeo\]\((.+)\)')
     picture_url = re.compile('\!\[picture\]\((.+)\)')
     gif_url = re.compile('\!\[gif\]\((.+)\)')
@@ -77,6 +84,11 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
             if line.startswith('[youtube]'):
                 url = youtube_url.match(line).group(1)
                 article.preview = YouTube(url)
+                continue
+
+            if line.startswith('[rutube]'):
+                url = rutube_url.match(line).group(1)
+                article.preview = RuTube(url)
                 continue
 
             if line.startswith('[vimeo]'):
