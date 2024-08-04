@@ -227,6 +227,7 @@ body {
 }
 
 .tag-github:before {
+    font-family: sans-serif;
     content: '↗ '
 }
 
