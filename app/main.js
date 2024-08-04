@@ -166,6 +166,12 @@ window.onload = () => {
             img.src = preview.url;
         }
 
+        if (preview.type === 'github') {
+            let responsive = append('div', 'aspect-16-9-github', card);
+            let img = append('img', 'github', responsive);
+            img.src = preview.url;
+        }
+
         if (preview.type === 'gif') {
             let responsive = append('div', 'aspect-16-9', card);
             let img = append('img', 'gif', responsive);
@@ -214,6 +220,14 @@ window.onload = () => {
             let span = append('a', className, tags);
             span.innerText = tag;
             span.href = href;
+        }
+
+        if (preview.type === 'github') {
+            // append('div', 'spacer', tags);
+            let span = append('a', 'tag tag-github', tags);
+            // span.innerText = "github";
+            span.innerHTML = "GitHub";
+            span.href = article.link;
         }
     }
 }

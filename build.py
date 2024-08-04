@@ -32,6 +32,11 @@ class Picture:
     type: str = 'picture'
 
 @dataclass
+class Github:
+    url: str
+    type: str = 'github'
+
+@dataclass
 class Gif:
     url: str
     type: str = 'gif'
@@ -42,7 +47,7 @@ class Article:
     title: str
     date: str
     tags: List[str]
-    preview: Union[Picture, YouTube, Vimeo]
+    preview: Union[Picture, YouTube, Vimeo, Github]
     text: str
     link: Optional[str]
     coordinates: List[float]
@@ -60,6 +65,7 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
     rutube_url = re.compile('\[rutube\]\((.+)\)')
     vimeo_url = re.compile('\[vimeo\]\((.+)\)')
     picture_url = re.compile('\!\[picture\]\((.+)\)')
+    github_url = re.compile('\!\[github\]\((.+)\)')
     gif_url = re.compile('\!\[gif\]\((.+)\)')
     with open(path) as file:
         while line := file.readline():
@@ -101,6 +107,11 @@ def parse_markdown_article(path: str, pictures_root: str) -> List[Article]:
                 if not url.startswith('http'):
                     url = pictures_root + url
                 article.preview = Picture(url)
+                continue
+
+            if line.startswith('![github]'):
+                url = github_url.match(line).group(1)
+                article.preview = Github(url)
                 continue
 
             if line.startswith('![gif]'):
